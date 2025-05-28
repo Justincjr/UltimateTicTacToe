@@ -12,7 +12,7 @@ class UltimateTicTacToeUI:
         self.state = State(fill_num=start_fill)
         
         self.root = tk.Tk()
-        self.root.title("Ultimate Tic Tac Toe: Human vs StudentAgent")
+        self.root.title("Ultimate Tic Tac Toe")
         
         # Create frame for the 9x9 board grid.
         self.board_frame = tk.Frame(self.root)
@@ -62,19 +62,7 @@ class UltimateTicTacToeUI:
     
     def update_ui(self):
         # If the game is over, disable all buttons and display the result.
-        if self.state.is_terminal():
-            for row in self.buttons:
-                for btn in row:
-                    btn.config(state="disabled")
-            util = self.state.terminal_utility()
-            if util == 1.0:
-                msg = "You win!"
-            elif util == 0.0:
-                msg = "You lose!"
-            else:
-                msg = "Draw!"
-            self.message_label.config(text=msg)
-            return
+
 
         valid_actions = self.state.get_all_valid_actions()
         valid_boards = set((a[0], a[1]) for a in valid_actions)  # Set of (super_row, super_col)
@@ -104,6 +92,20 @@ class UltimateTicTacToeUI:
                     self.buttons[i][j].config(state="normal")
                 else:
                     self.buttons[i][j].config(state="disabled")
+                    
+        if self.state.is_terminal():
+            for row in self.buttons:
+                for btn in row:
+                    btn.config(state="disabled")
+            util = self.state.terminal_utility()
+            if util == 1.0:
+                msg = "You win!"
+            elif util == 0.0:
+                msg = "You lose!"
+            else:
+                msg = "Draw!"
+            self.message_label.config(text=msg)
+            return
 
         if self.state.fill_num == self.human_fill:
             self.message_label.config(text="Your turn")
