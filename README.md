@@ -20,10 +20,10 @@ Ultimate Tic Tac Toe is played on a 3x3 grid of 3x3 local boards:
 
 The game lets you play against a **StudentAgent**:
 
-- Human plays as **X** (1)
-- Computer plays as **O** (2)
-- The board highlights valid local boards for the current move.
+- You can choose to play as **X** (Player 1) or **O** (Player 2) at the start.
+- The board highlights the valid local boards based on the previous move.
 - The computer uses a decision-making agent to select its moves.
+- The game automatically disables input and announces the result (win/lose/draw) when it ends.
 
 ---
 
