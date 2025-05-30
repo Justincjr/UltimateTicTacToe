@@ -2,7 +2,7 @@ from agent import StudentAgent
 from agent3 import StudentAgent3
 from utils import State, Action, get_random_valid_action
 import tkinter as tk
-from tkinter import messagebox, simpledialog
+from tkinter import messagebox
 import time
 
 class UltimateTicTacToeUI:
@@ -140,9 +140,9 @@ class UltimateTicTacToeUI:
                 for btn in row:
                     btn.config(state="disabled")
             util = self.state.terminal_utility()
-            if util == 1.0:
+            if util == (1.0 and self.human_fill==1) or (util == 0.0 and self.human_fill==2):
                 msg = "You win!"
-            elif util == 0.0:
+            elif util == (0.0 and self.human_fill==1) or (util == 1.0 and self.human_fill==2):
                 msg = "You lose!"
             else:
                 msg = "Draw!"
