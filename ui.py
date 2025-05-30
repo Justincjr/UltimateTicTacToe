@@ -1,17 +1,44 @@
 from agent import StudentAgent
+from agent3 import StudentAgent3
 from utils import State, Action, get_random_valid_action
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 import time
 
 class UltimateTicTacToeUI:
-    def __init__(self, student_agent: StudentAgent, start_fill=1):
-        self.student_agent = student_agent
-        self.human_fill = 1    # Human plays as 1 ("X")
-        self.computer_fill = 2 # Computer plays as 2 ("O")
-        self.state = State(fill_num=start_fill)
+    def __init__(self):
+        self.student_agent = None
+        self.state = State(fill_num=1)
         
         self.root = tk.Tk()
+        self.root.withdraw()  # Hide main window until choice is made
+
+        # Popup to choose player
+        self.human_fill = None
+        self.computer_fill = None
+
+        self.choice_window = tk.Toplevel()
+        self.choice_window.title("Choose Player")
+
+        label = tk.Label(self.choice_window, text="Choose your symbol:")
+        label.pack(pady=10)
+
+        button_frame = tk.Frame(self.choice_window)
+        button_frame.pack()
+
+        btn_x = tk.Button(button_frame, text="Play as X (Player 1)", width=20,
+                          command=lambda: self.set_player_choice(1))
+        btn_x.grid(row=0, column=0, padx=10)
+
+        btn_o = tk.Button(button_frame, text="Play as O (Player 2)", width=20,
+                          command=lambda: self.set_player_choice(2))
+        btn_o.grid(row=0, column=1, padx=10)
+
+        self.root.wait_window(self.choice_window)  # Pause until choice is made
+
+        self.state = State(fill_num=1)  # Always start with Player 1
+
+        self.root.deiconify()
         self.root.title("Ultimate Tic Tac Toe")
         
         # Create frame for the 9x9 board grid.
@@ -51,7 +78,22 @@ class UltimateTicTacToeUI:
 
         
         self.update_ui()
-    
+
+    def set_player_choice(self, number):
+        if number == 1:
+            self.student_agent = StudentAgent()
+            print("agent1 initialized")
+            self.human_fill = 1    # Human plays as 1 ("X")
+            self.computer_fill = 2 # Computer plays as 2 ("O")
+        else:
+            self.student_agent = StudentAgent3()
+            print("agent3 initialized")
+            self.human_fill = 2    # Human plays as 1 ("X")
+            self.computer_fill = 1 # Computer plays as 2 ("O")
+        self.choice_window.destroy() 
+
+
+
     def get_action_from_coords(self, global_row, global_col) -> Action:
         # Compute the corresponding action tuple from global board coordinates.
         super_row = global_row // 3
@@ -148,9 +190,7 @@ class UltimateTicTacToeUI:
 # =================== Main ===================
 if __name__ == "__main__":
     print("starting ......")
-    student_agent = StudentAgent()
-    print("student_agent initialized")
     # Start with fill_num=1 so that the human goes first.
-    ui = UltimateTicTacToeUI(student_agent, start_fill=1)
+    ui = UltimateTicTacToeUI()
     print("calling run")
     ui.run()
