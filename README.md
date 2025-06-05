@@ -36,6 +36,7 @@ To start the game:
 
 ```bash
 python ui.py
+```
 
 ### 💻 Option 2: Run the Executable (Windows only)
 
