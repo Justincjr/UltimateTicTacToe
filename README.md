@@ -29,8 +29,25 @@ The game lets you play against a **StudentAgent**:
 
 ## ▶️ Running the Game
 
-Ensure you have Python 3 installed.  
+### 🐍 Option 1: Run with Python (for development)
+
+Ensure you have **Python 3** installed.  
 To start the game:
 
 ```bash
 python ui.py
+
+### 💻 Option 2: Run the Executable (Windows only)
+
+You can download the pre-built `.exe` file and run it directly on a Windows machine — **no Python installation required**.
+
+1. Download the `.exe` file in releases
+2. Double-click the file to launch the game.
+
+> 📝 If Windows shows a security warning (e.g., “Windows protected your PC”), click **More info** → **Run anyway**.
+
+Alternatively, you can run it from PowerShell or Command Prompt:
+
+```powershell
+.\ui.exe
+

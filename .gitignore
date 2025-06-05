@@ -2,3 +2,6 @@ __pycache__/
 figures/
 *.pkl
 *.txt
+ui.spec
+build/
+dist/
