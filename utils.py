@@ -243,6 +243,14 @@ class State: # Wrapper for ImmutableState
             fill_num=self._state.fill_num,
             prev_local_action=self._state.prev_local_action
         )
+    
+    def to_dict(self):
+        return {
+            "board": self._state.board.tolist(),
+            "fill_num": self._state.fill_num,
+            "prev_local_action": self._state.prev_local_action,
+            "local_board_status": self._state.local_board_status.tolist()
+        }
 
 
 def load_data() -> list[tuple[State, float]]:
@@ -255,3 +263,4 @@ def load_data() -> list[tuple[State, float]]:
         state = State(board=board, fill_num=fill_num, prev_local_action=prev_local_action)
         new_data.append((state, utility))
     return new_data
+
