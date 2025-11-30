@@ -23,6 +23,38 @@ interface GameData {
   pendingMove: number[] | null; // Track pending move for optimistic UI
 }
 
+// Check if a 3x3 board has a winner
+function checkBoardStatus(board: number[][]): number {
+  // Check rows
+  for (let i = 0; i < 3; i++) {
+    if (board[i][0] !== 0 && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+      return board[i][0];
+    }
+  }
+  // Check columns
+  for (let i = 0; i < 3; i++) {
+    if (board[0][i] !== 0 && board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
+      return board[0][i];
+    }
+  }
+  // Check diagonals
+  if (board[0][0] !== 0 && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+    return board[0][0];
+  }
+  if (board[0][2] !== 0 && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+    return board[0][2];
+  }
+  // Check for draw (all filled)
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] === 0) {
+        return 0; // Still ongoing
+      }
+    }
+  }
+  return 3; // Draw
+}
+
 function App() {
   const [gameData, setGameData] = useState<GameData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,16 +97,26 @@ function App() {
   const makeMove = useCallback(async (action: number[]) => {
     if (!gameData || isLoading) return;
     
-    // Optimistic UI update - immediately show the move
+    // Optimistic UI update - immediately show the move and check for local board win
     setGameData(prev => {
       if (!prev) return null;
       const newBoard = JSON.parse(JSON.stringify(prev.state.board));
       newBoard[action[0]][action[1]][action[2]][action[3]] = prev.humanFill;
+      
+      // Check if this move wins the local board
+      const newLocalBoardStatus = JSON.parse(JSON.stringify(prev.state.local_board_status));
+      const localBoard = newBoard[action[0]][action[1]];
+      const localStatus = checkBoardStatus(localBoard);
+      if (localStatus !== 0) {
+        newLocalBoardStatus[action[0]][action[1]] = localStatus;
+      }
+      
       return {
         ...prev,
         state: {
           ...prev.state,
-          board: newBoard
+          board: newBoard,
+          local_board_status: newLocalBoardStatus
         },
         validActions: [], // Clear valid actions while waiting
         pendingMove: action
@@ -220,10 +262,6 @@ function App() {
           )}
         </AnimatePresence>
       </main>
-
-      <footer className="footer">
-        <p>Built with React & Flask</p>
-      </footer>
     </div>
   );
 }

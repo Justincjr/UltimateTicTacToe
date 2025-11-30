@@ -10,7 +10,7 @@ interface GameStatusProps {
 }
 
 function GameStatus({ currentTurn, humanFill, isTerminal, result, isLoading }: GameStatusProps) {
-  const isHumanTurn = currentTurn === humanFill;
+  const isHumanTurn = currentTurn === humanFill && !isLoading;
   const humanSymbol = humanFill === 1 ? 'X' : 'O';
   const aiSymbol = humanFill === 1 ? 'O' : 'X';
 
@@ -68,7 +68,10 @@ function GameStatus({ currentTurn, humanFill, isTerminal, result, isLoading }: G
         <div className="turn-indicator">
           <motion.div 
             className="turn-marker"
-            animate={{ x: isHumanTurn ? 0 : '100%' }}
+            animate={{ 
+              left: isHumanTurn ? '0%' : '50%',
+              backgroundColor: isHumanTurn ? 'var(--x-color)' : 'var(--o-color)'
+            }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />
         </div>

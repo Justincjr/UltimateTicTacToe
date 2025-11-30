@@ -85,7 +85,7 @@
   top: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, var(--x-color), var(--o-color));
+  background: var(--primary);
   border-radius: 2px;
 }
 
