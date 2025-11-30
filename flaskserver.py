@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from agent import StudentAgent
 from agent3 import StudentAgent3
@@ -6,8 +6,9 @@ from utils import State, get_random_valid_action
 import time
 import uuid
 import numpy as np
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 app.secret_key = 'ultimate-tictactoe-secret-key'
 CORS(app, origins=["http://localhost:3000", "http://localhost:5173"])
 
@@ -170,7 +171,20 @@ def reset_game():
     return start_game()
 
 
+# Serve React frontend in production
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.route('/<path:path>')
+def serve_static(path):
+    if os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
+
+
 if __name__ == "__main__":
     print("Starting Ultimate Tic Tac Toe Flask Server...")
     print("API available at http://localhost:5000")
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

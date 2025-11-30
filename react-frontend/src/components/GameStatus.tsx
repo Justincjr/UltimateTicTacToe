@@ -13,6 +13,10 @@ function GameStatus({ currentTurn, humanFill, isTerminal, result, isLoading }: G
   const isHumanTurn = currentTurn === humanFill && !isLoading;
   const humanSymbol = humanFill === 1 ? 'X' : 'O';
   const aiSymbol = humanFill === 1 ? 'O' : 'X';
+  
+  // Colors based on who plays what symbol
+  const humanColor = humanFill === 1 ? 'var(--x-color)' : 'var(--o-color)';
+  const aiColor = humanFill === 1 ? 'var(--o-color)' : 'var(--x-color)';
 
   const getStatusMessage = () => {
     if (isTerminal) {
@@ -47,7 +51,7 @@ function GameStatus({ currentTurn, humanFill, isTerminal, result, isLoading }: G
           <span className="label">You</span>
         </div>
         
-        <div className="status-message">
+        <div className="status-message" style={{ color: isTerminal ? undefined : (isHumanTurn ? humanColor : aiColor) }}>
           {isLoading && !isTerminal && (
             <div className="thinking-dots">
               <span></span><span></span><span></span>
@@ -70,7 +74,7 @@ function GameStatus({ currentTurn, humanFill, isTerminal, result, isLoading }: G
             className="turn-marker"
             animate={{ 
               left: isHumanTurn ? '0%' : '50%',
-              backgroundColor: isHumanTurn ? 'var(--x-color)' : 'var(--o-color)'
+              backgroundColor: isHumanTurn ? humanColor : aiColor
             }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />

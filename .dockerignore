@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Node modules
+node_modules/
+react-frontend/node_modules/
+
+# Build outputs
+react-frontend/dist/
+static/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.DS_Store
+*.log
