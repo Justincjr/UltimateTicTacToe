@@ -152,16 +152,18 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="title"
-        >
-          Ultimate Tic Tac Toe
-        </motion.h1>
-        <p className="subtitle">Challenge the AI</p>
-      </header>
+      {!gameData && (
+        <header className="header">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="title"
+          >
+            Ultimate Tic Tac Toe
+          </motion.h1>
+          <p className="subtitle">Challenge the AI</p>
+        </header>
+      )}
 
       <main className="main">
         <AnimatePresence mode="wait">
