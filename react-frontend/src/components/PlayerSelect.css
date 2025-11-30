@@ -1,0 +1,131 @@
+.player-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+}
+
+.select-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.select-subtitle {
+  color: var(--text-secondary);
+  margin-top: -1rem;
+}
+
+.player-options {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.player-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--bg-hover);
+}
+
+.player-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.x-button {
+  border-color: rgba(34, 211, 238, 0.3);
+}
+
+.x-button:hover:not(:disabled) {
+  border-color: var(--x-color);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.o-button {
+  border-color: rgba(244, 114, 182, 0.3);
+}
+
+.o-button:hover:not(:disabled) {
+  border-color: var(--o-color);
+  background: rgba(244, 114, 182, 0.1);
+}
+
+.player-symbol {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.x-symbol {
+  color: var(--x-color);
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+.o-symbol {
+  color: var(--o-color);
+  text-shadow: 0 0 20px rgba(244, 114, 182, 0.5);
+}
+
+.player-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.player-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--bg-hover);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.rules-hint {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.rules-hint h3 {
+  font-size: 0.9rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.rules-hint p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

@@ -1,0 +1,168 @@
+.game-board {
+  background: var(--bg-card);
+  padding: 1.25rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.super-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.super-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mini-board {
+  position: relative;
+  background: var(--bg-hover);
+  border-radius: 0.75rem;
+  padding: 6px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.mini-board.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.mini-board.x-won {
+  background: var(--won-x);
+  border-color: rgba(34, 211, 238, 0.3);
+}
+
+.mini-board.o-won {
+  background: var(--won-o);
+  border-color: rgba(244, 114, 182, 0.3);
+}
+
+.mini-board.draw {
+  background: var(--draw);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(2px);
+}
+
+.board-winner {
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 0 0 30px currentColor;
+}
+
+.board-winner.x {
+  color: var(--x-color);
+}
+
+.board-winner.o {
+  color: var(--o-color);
+}
+
+.board-winner.draw {
+  color: var(--text-secondary);
+  font-size: 3rem;
+}
+
+.local-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.local-row {
+  display: flex;
+  gap: 3px;
+}
+
+.cell {
+  width: clamp(28px, 8vw, 45px);
+  height: clamp(28px, 8vw, 45px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-dark);
+  border: none;
+  border-radius: 6px;
+  cursor: default;
+  transition: all 0.2s ease;
+  font-size: clamp(14px, 4vw, 22px);
+  font-weight: 700;
+}
+
+.cell.valid {
+  cursor: pointer;
+  background: var(--valid-cell);
+  animation: pulse 2s infinite;
+}
+
+.cell.valid:hover {
+  background: rgba(99, 102, 241, 0.5);
+  transform: scale(1.05);
+}
+
+.cell.filled {
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0);
+  }
+}
+
+.cell-x {
+  color: var(--x-color);
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+.cell-o {
+  color: var(--o-color);
+  text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .game-board {
+    padding: 0.75rem;
+  }
+  
+  .super-grid {
+    gap: 6px;
+  }
+  
+  .super-row {
+    gap: 6px;
+  }
+  
+  .mini-board {
+    padding: 4px;
+  }
+  
+  .local-grid {
+    gap: 2px;
+  }
+  
+  .local-row {
+    gap: 2px;
+  }
+  
+  .board-winner {
+    font-size: 2.5rem;
+  }
+}
