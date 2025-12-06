@@ -43,5 +43,6 @@ EXPOSE 5000
 ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
-# Run the Flask server
-CMD ["python", "flaskserver.py"]
+# Run the Flask server with Gunicorn (production WSGI server)
+# Using 1 worker with threads to preserve in-memory session state
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "4", "flaskserver:app"]
