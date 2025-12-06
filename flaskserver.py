@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from agent import StudentAgent
-from agent3 import StudentAgent3
+from agent6 import StudentAgent6
 from utils import State, get_random_valid_action
 import time
 import uuid
@@ -42,7 +41,7 @@ def start_game():
         "state": state,
         "human_fill": player_choice,
         "computer_fill": 3 - player_choice,
-        "agent": StudentAgent() if player_choice == 1 else StudentAgent3()
+        "agent": StudentAgent6() if player_choice == 1 else StudentAgent6()
     }
 
     sessions[game_id] = session_data

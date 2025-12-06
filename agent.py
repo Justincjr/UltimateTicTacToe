@@ -7,8 +7,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from collections import OrderedDict
-from agent5 import StudentAgent5
-
+from agent6 import StudentAgent6
+from agent9 import StudentAgent9
 
 weights = OrderedDict([
     ('fc1.weight', torch.tensor(
@@ -93437,8 +93437,8 @@ def run(your_agent: StudentAgent, random_agent: StudentAgent, start_num: int):
     print(f"Invalid count: {invalid_count}")
 
 if __name__ == "__main__":
-    your_agent = StudentAgent()
-    random_agent = StudentAgent5()
+    your_agent = StudentAgent9()
+    random_agent = StudentAgent6()
     run(your_agent, random_agent, 1)
     print("game 1 over")
     run(your_agent, random_agent, 2)
